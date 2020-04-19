@@ -2,7 +2,7 @@ defmodule EmailOpen do
   use Defopaque
   defopen(:email, String.t())
 
-  @spec new(String.t()) :: email()
+  @spec new(String.t()) :: t()
   def new(s) when is_binary(s) do
     email(s)
   end
@@ -13,7 +13,7 @@ defmodule EmailClosed do
   use Defopaque
   defopaque(:email, String.t())
 
-  @spec new(String.t()) :: email()
+  @spec new(String.t()) :: t()
   def new(s) when is_binary(s) do
     email(s)
   end

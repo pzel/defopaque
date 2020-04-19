@@ -8,8 +8,8 @@ defmodule Defopaque do
   defmacro defopaque(kons, typ) do
     t = build_cons(kons, typ)
     quote do
-      @opaque t :: {unquote(t), unquote(typ)}
-
+      @opaque unquote(kons)() :: {unquote(t), unquote(typ)}
+      @spec unquote(kons)(unquote(typ)) :: unquote(kons)
       defmacrop unquote(kons)(arg) do
         opaque_kons = unquote(t)
         quote do: {unquote(opaque_kons), unquote(arg)}
@@ -20,13 +20,12 @@ defmodule Defopaque do
   defmacro defopen(kons, typ) do
     t = build_cons(kons, typ)
     quote do
-      @type t :: {unquote(t), unquote(typ)}
-
+      @type unquote(kons)() :: {unquote(t), unquote(typ)}
+      @spec unquote(kons)(unquote(typ)) :: unquote(kons)
       defmacro unquote(kons)(arg) do
         opaque_kons = unquote(t)
         quote do: {unquote(opaque_kons), unquote(arg)}
       end
-      # todo: generate __Using__ to export kons/1
     end
   end
 
@@ -34,7 +33,7 @@ defmodule Defopaque do
     c = String.trim(inspect(constructor), ":")
     b = c <> inspect(value_type)
     h = :crypto.hash(:sha256, b) |> String.slice(1..10)
-    :"#{Base.encode16(h)}-#{c}"
+    :"#{String.downcase(Base.encode16(h))}-#{c}"
   end
 
 end
