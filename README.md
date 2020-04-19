@@ -92,4 +92,14 @@ With this method, code that does not reference our `Units` module cannot in good
 Also, unique and opaque tags mean that dialyzer can be much more strict when
 checking our code.
 
+# Try it out
 
+```
+# file: mix.exs
+
+defp deps do
+  [
+    {:defopaque, git: "https://git.sr.ht/~pzel/defopaque", tag: "master"}
+  ]
+end
+```
