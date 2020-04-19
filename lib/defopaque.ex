@@ -9,7 +9,6 @@ defmodule Defopaque do
     t = build_cons(kons, typ)
     quote do
       @opaque unquote(kons)() :: {unquote(t), unquote(typ)}
-      @spec unquote(kons)(unquote(typ)) :: unquote(kons)
       defmacrop unquote(kons)(arg) do
         opaque_kons = unquote(t)
         quote do: {unquote(opaque_kons), unquote(arg)}
@@ -21,7 +20,6 @@ defmodule Defopaque do
     t = build_cons(kons, typ)
     quote do
       @type unquote(kons)() :: {unquote(t), unquote(typ)}
-      @spec unquote(kons)(unquote(typ)) :: unquote(kons)
       defmacro unquote(kons)(arg) do
         opaque_kons = unquote(t)
         quote do: {unquote(opaque_kons), unquote(arg)}
