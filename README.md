@@ -2,7 +2,8 @@
 
 An experiment in defining 'newtypes' in Elixir.
 
-Read the [introduction here]().
+Read the [introduction
+here](https://pzel.name/2020/04/26/Newtype-like-tagged-tuples-in-Elixir.html).
 
 ```
 # file: mix.exs
