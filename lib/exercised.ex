@@ -45,13 +45,19 @@ defmodule ExercisedFunctionality do
 end
 
 defmodule ExercisedFunctionality2 do
-  require EmailOpen
+  import EmailOpen
   def f(s) do
     case EmailOpen.new(s) do
       EmailOpen.email(^s) = e -> IO.inspect(e); "OK-open"
       _ -> "NOT OK"
     end
   end
+
+  @spec g(EmailOpen.email()) :: String.t()
+  def g(email(s)), do: s
+
+  # this angers dialyzer
+  #def x, do: g(:badtype)
 end
 
 defmodule ExercisedFunctionality3 do
